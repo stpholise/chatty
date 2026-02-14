@@ -3,7 +3,7 @@ import toast from 'react-hot-toast'
 import { axiosInstance } from '../lib/axios'
 
 
-export const useChartStore = create((set) => ({
+export const useChatStore = create((set) => ({
     messages: [],
     users: [],
     selectedUser: null, 
@@ -13,7 +13,7 @@ export const useChartStore = create((set) => ({
     getUsers : async () => {
         set({ isUserLoading: true})
         try{
-            const res= await axiosInstance.get("/message/users")
+            const res= await axiosInstance.get("/messages/users")
             set({users: res.data});
 
         } catch(error) {
@@ -34,5 +34,7 @@ export const useChartStore = create((set) => ({
         }finally {
             set({ isMessagesLoading: false})
         }
-    }
+    }, 
+
+    setSelectedUser: (selectedUser) => set({selectedUser})
 }))
